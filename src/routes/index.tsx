@@ -1,16 +1,10 @@
-import { component$, useSignal, useTask$ } from '@builder.io/qwik';
+import { component$, useSignal } from '@builder.io/qwik';
 import type { DocumentHead } from '@builder.io/qwik-city';
 import { MUIButton, MUITextField } from '../integrations/react/mui';
 
 export default component$(() => {
   const count = useSignal(0);
   const increment = useSignal(1);
-
-  useTask$(({ track }) => {
-    track(() => {
-      console.log('increment.value', increment.value);
-    });
-  });
 
   return (
     <div class="container mx-auto flex flex-col gap-4">
@@ -24,7 +18,7 @@ export default component$(() => {
         type="number"
         client:visible
         onChange$={(e) => {
-          increment.value = Number(e.currentTarget.value);
+          increment.value = Number(e.target.value);
         }}
         value={increment.value}
       />
